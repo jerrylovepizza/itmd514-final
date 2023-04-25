@@ -2,13 +2,28 @@
 title: "Group Final Project"
 author: "Hongyu Pi, Renjie Dai, Zhibang Yuan"
 date: "Due 4/28 11:59 pm"
-output: html_document
+output:html_document : 
 ---
 
+# Data Preparation
 
+## Dataset Description
 
+The real estate markets, like those in Sydney and Melbourne, present an interesting opportunity for data analysts to analyze and predict where property prices are moving towards. Prediction of property prices is becoming increasingly important and beneficial. Property prices are a good indicator of both the overall market condition and the economic health of a country.
 
+> Dataset From : <https://www.kaggle.com/datasets/shree1992/housedata>
 
-# Referrences
+For convenience of development, I have already downloaded the data to my local.
 
-> Datasets: https://www.kaggle.com/datasets/shree1992/housedata
+## Load data
+
+```{r}
+# Load data
+housedata <- read.csv("./housedata.csv")
+
+# Format date: 2014-05-20 00:00:00 -> 2014-05-02
+housedata$date <- substring(housedata$date,0,10)
+
+# Print data (10 rows)
+head(housedata,10)
+```
