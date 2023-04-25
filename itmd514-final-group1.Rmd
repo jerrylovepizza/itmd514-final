@@ -59,7 +59,7 @@ sum(is.na(housedata))
 
 > No Missing data.
 
-### 1.3.4
+### 1.3.4 Duplicated data
 
 ```{r}
 sum(duplicated(housedata))
