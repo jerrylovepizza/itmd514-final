@@ -39,24 +39,28 @@ head(housedata,10)
 ### 1.3.1 Dimension
 
 ```{r}
+# Dimension
 dim(housedata)
 ```
 
 ### 1.3.2 Structure
 
 ```{r}
+# Structure
 str(housedata)
 ```
 
 ### 1.3.3 Summary
 
 ```{r}
+# Summary
 summary(housedata)
 ```
 
 ### 1.3.4 Missing data
 
 ```{r}
+# null value
 sum(is.na(housedata))
 ```
 
@@ -65,6 +69,7 @@ sum(is.na(housedata))
 ### 1.3.5 Duplicated data
 
 ```{r}
+# duplicated 
 sum(duplicated(housedata))
 ```
 
@@ -72,7 +77,7 @@ sum(duplicated(housedata))
 
 # 2 Data Exploration
 
-## 2.1 House Price  
+## 2.1 House Price
 
 ```{r}
 # histogram
@@ -82,10 +87,9 @@ ggplot(housedata, aes(x = price)) +
   labs(x = "Price", y = "Frequency") +
   ggtitle("Histogram of House Price") +
   theme_bw()
-
 ```
 
-## 2.2  House Square Footage  
+## 2.2 House Square Footage
 
 ```{r}
 # Price threshold
@@ -100,13 +104,11 @@ ggplot(housedata, aes(x=priceType,y = sqft_above)) +
   labs(x = "Price Type", y = "Square Footage") +
   ggtitle("Boxplot of House Square Footage  ") +
   theme_bw()
-
 ```
 
-
 ## 2.3 Price and Square Footage
-```{r}
 
+```{r}
 # Overlay Histogram
 ggplot() +
   geom_histogram(data = housedata, aes(x = sqft_above, fill = priceType), binwidth = 300,col="white") +
@@ -115,7 +117,9 @@ ggplot() +
   theme_bw()
 ```
 
-## 2.4 Correlation Analysis
+# 3 Data Analysis
+
+## 3.1 Correlation Analysis
 
 ```{r}
 # matrix
@@ -125,4 +129,6 @@ housedataNumericMatrix <- cor(housedata[,sapply(housedata, is.numeric)])
 corrplot(housedataNumericMatrix, method="square")
 ```
 
-# 3 Data Analysis
+## 3.2 Hypothesis Testing
+
+## 3.3 Linear Regression Model
