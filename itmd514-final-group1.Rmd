@@ -100,15 +100,15 @@ ggplot(housedata, aes(x = country,y = sqft_above)) +
 priceThreshold = max(mean(housedata$price),median(housedata$price))
 
 # Split Dataset
-houseCheap <- subset(housedata, price <= priceThreshold)
-houseExpensive <- subset(housedata, price > priceThreshold)
+lowPrice <- subset(housedata, price <= priceThreshold)
+highPrice <- subset(housedata, price > priceThreshold)
 
 # Overlaid Histogram
 ggplot() +
-  geom_histogram(data = houseCheap, aes(x = sqft_above, fill = "Cheap"), binwidth = 100) +
-  geom_histogram(data = houseExpensive, aes(x = sqft_above, fill = "Expensive"), binwidth = 100) +
-  scale_fill_manual(name = "Price", values = c("red", "blue")) +
-  labs(title = "Overlaid Histogram of House Area and Price",x = "Area", y = "Count") +
+  geom_histogram(data = lowPrice, aes(x = sqft_above, fill = "Low"), binwidth = 100) +
+  geom_histogram(data = highPrice, aes(x = sqft_above, fill = "High"), binwidth = 100) +
+  scale_fill_manual(name = "PriceType", values = c("red", "blue")) +
+  labs(title = "Overlay Histogram of House Area and Price",x = "Square Footage", y = "Frequency") +
   theme_classic()
 ```
 
