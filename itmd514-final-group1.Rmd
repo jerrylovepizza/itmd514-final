@@ -6,6 +6,7 @@ output:html_document :
 ---
 
 ```{r}
+library("ggplot2")
 ```
 
 # 1 Data Preparation
@@ -67,6 +68,50 @@ sum(duplicated(housedata))
 
 > No Duplicated data.
 
-# Data Exploration
+# 2 Data Exploration
 
-# Data Analysis
+## 2.1 House Price  
+
+```{r}
+# histogram
+ggplot(housedata, aes(x = price)) + 
+  geom_histogram(binwidth = 50000, col = "blue", fill = "blue") + 
+  scale_x_continuous(labels = scales::comma_format()) + 
+  labs(x = "Price", y = "Frequency") +
+  ggtitle("Histogram of House Price")
+
+```
+
+## 2.2  House Square Footage  
+
+```{r}
+# Boxplot
+ggplot(housedata, aes(x = country,y = sqft_above)) + 
+  geom_boxplot(col="blue" ) + 
+  labs(y = "Square Footage") +
+  ggtitle("Boxplot of House Square Footage  ")
+
+```
+
+
+## 2.3 Price and Square Footage
+```{r}
+# Price threshold
+priceThreshold = max(mean(housedata$price),median(housedata$price))
+
+# Split Dataset
+houseCheap <- subset(housedata, price <= priceThreshold)
+houseExpensive <- subset(housedata, price > priceThreshold)
+
+# Overlaid Histogram
+ggplot() +
+  geom_histogram(data = houseCheap, aes(x = sqft_above, fill = "Cheap"), binwidth = 100) +
+  geom_histogram(data = houseExpensive, aes(x = sqft_above, fill = "Expensive"), binwidth = 100) +
+  scale_fill_manual(name = "Price", values = c("red", "blue")) +
+  labs(title = "Overlaid Histogram of House Area and Price",x = "Area", y = "Count") +
+  theme_classic()
+```
+
+
+
+# 3 Data Analysis
