@@ -78,40 +78,39 @@ ggplot(housedata, aes(x = price)) +
   geom_histogram(binwidth = 50000, col = "blue", fill = "blue") + 
   scale_x_continuous(labels = scales::comma_format()) + 
   labs(x = "Price", y = "Frequency") +
-  ggtitle("Histogram of House Price")
+  ggtitle("Histogram of House Price") +
+  theme_bw()
 
 ```
 
 ## 2.2  House Square Footage  
 
 ```{r}
+# Price threshold
+priceThreshold = max(mean(housedata$price),median(housedata$price))
+
+# priceType
+housedata <- dplyr::mutate(housedata ,priceType = case_when(price <= priceThreshold ~ 'Low' ,price > priceThreshold ~ 'High'))
+
 # Boxplot
-ggplot(housedata, aes(x = country,y = sqft_above)) + 
+ggplot(housedata, aes(x=priceType,y = sqft_above)) + 
   geom_boxplot(col="blue" ) + 
-  labs(y = "Square Footage") +
-  ggtitle("Boxplot of House Square Footage  ")
+  labs(x = "Price Type", y = "Square Footage") +
+  ggtitle("Boxplot of House Square Footage  ") +
+  theme_bw()
 
 ```
 
 
 ## 2.3 Price and Square Footage
 ```{r}
-# Price threshold
-priceThreshold = max(mean(housedata$price),median(housedata$price))
 
-# Split Dataset
-lowPrice <- subset(housedata, price <= priceThreshold)
-highPrice <- subset(housedata, price > priceThreshold)
-
-# Overlaid Histogram
+# Overlay Histogram
 ggplot() +
-  geom_histogram(data = lowPrice, aes(x = sqft_above, fill = "Low"), binwidth = 100) +
-  geom_histogram(data = highPrice, aes(x = sqft_above, fill = "High"), binwidth = 100) +
+  geom_histogram(data = housedata, aes(x = sqft_above, fill = priceType), binwidth = 300,col="white") +
   scale_fill_manual(name = "PriceType", values = c("red", "blue")) +
-  labs(title = "Overlay Histogram of House Area and Price",x = "Square Footage", y = "Frequency") +
-  theme_classic()
+  labs(title = "Overlay Histogram of House Area and Price",x = "Square Footage", y = "Density") +
+  theme_bw()
 ```
-
-
 
 # 3 Data Analysis
