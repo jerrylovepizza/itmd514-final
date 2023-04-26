@@ -2,11 +2,13 @@
 title: "Final Project --Grouop1"
 author: "Hongyu Pi, Renjie Dai, Zhibang Yuan"
 date: "Due 4/28 11:59 pm"
-output:html_document : 
+output: html_document
 ---
 
 ```{r}
 library("ggplot2")
+library("corrplot")
+library("dplyr")
 ```
 
 # 1 Data Preparation
@@ -111,6 +113,16 @@ ggplot() +
   scale_fill_manual(name = "PriceType", values = c("red", "blue")) +
   labs(title = "Overlay Histogram of House Area and Price",x = "Square Footage", y = "Density") +
   theme_bw()
+```
+
+## 2.4 Correlation Analysis
+
+```{r}
+# matrix
+housedataNumericMatrix <- cor(housedata[,sapply(housedata, is.numeric)])
+
+# corrplot
+corrplot(housedataNumericMatrix, method="square")
 ```
 
 # 3 Data Analysis
