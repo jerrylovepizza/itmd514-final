@@ -117,9 +117,7 @@ ggplot() +
   theme_bw()
 ```
 
-# 3 Data Analysis
-
-## 3.1 Correlation Analysis
+## 2.4 Correlation Analysis
 
 ```{r}
 # matrix
@@ -129,6 +127,8 @@ housedataNumericMatrix <- cor(housedata[,sapply(housedata, is.numeric)])
 corrplot(housedataNumericMatrix, method="square")
 ```
 
-## 3.2 Hypothesis Testing
+# 3 Data Analysis
 
-## 3.3 Linear Regression Model
+## 3.1 Hypothesis Testing
+
+## 3.2 Linear Regression Model
